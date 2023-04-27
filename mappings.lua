@@ -28,6 +28,10 @@ return {
     ["<A-k>"] = {
       "<cmd>m .-2<cr>==",
       desc = "Move up",
+    },
+    ["<C-t>"] = {
+      "<cmd>ToggleTerm<cr>",
+      desc = "Toggle terminal"
     }
   },
   i = {
