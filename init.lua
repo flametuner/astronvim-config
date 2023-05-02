@@ -21,7 +21,7 @@ return {
           cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
           filetypes = { 'solidity' },
           single_file_support = true,
-          root_dir = require("lspconfig.util").root_pattern("hardhat.config.js", "hardhat.config.ts"),
+          root_dir = require("lspconfig.util").root_pattern("hardhat.config.js", "hardhat.config.ts", "foundry.toml"),
         }
       end,
     },
@@ -102,6 +102,12 @@ return {
     },
   },
   plugins = {
+    {
+      "rcarriga/nvim-notify",
+      opts = {
+        top_down = false
+      }
+    },
     {
       "akinsho/toggleterm.nvim",
       opts = {
