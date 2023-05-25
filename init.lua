@@ -1,9 +1,13 @@
 return {
   colorscheme = "catppuccin",
   lsp = {
+    formatting = {
+      format_on_save = false,
+    },
     servers = {
       "solidity",
-      "lua_ls"
+      "lua_ls",
+      "terraformls",
     },
     config = {
       lua_ls = {
@@ -145,7 +149,7 @@ return {
     {
       "williamboman/mason-lspconfig.nvim",
       opts = {
-        ensure_installed = { "rust_analyzer", "tsserver", "gopls" },
+        ensure_installed = { "rust_analyzer", "tsserver", "gopls", "terraformls" },
       },
     },
     {
@@ -175,7 +179,7 @@ return {
         local opts = {
           formatters = {
             label = require("copilot_cmp.format").format_label_text,
-            insert_text = require("copilot_cmp.format").remove_existing,
+            insert_text = require("copilot_cmp.format").format_insert_text,
             preview = require("copilot_cmp.format").deindent,
           },
         }
@@ -184,6 +188,7 @@ return {
     },
     {
       "hrsh7th/nvim-cmp",
+      commit = "935b4069ce73b60ba9075bf05ee6ab50ed3af1a9",
       dependencies = { "zbirenbaum/copilot.lua" },
       opts = function(_, opts)
         local cmp, copilot = require "cmp", require "copilot.suggestion"
@@ -233,8 +238,8 @@ return {
           end,
         }
         opts.sources = {
-          { name = "copilot",  priority = 1250, group_index = 2 },
           { name = "nvim_lsp", priority = 1000, group_index = 2 },
+          { name = "copilot",  priority = 950,  group_index = 2 },
           { name = "luasnip",  priority = 750,  group_index = 2 },
           { name = "buffer",   priority = 500,  group_index = 2 },
           { name = "path",     priority = 250,  group_index = 2 },
