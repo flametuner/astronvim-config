@@ -5,9 +5,10 @@ return {
       format_on_save = false,
     },
     servers = {
-      "solidity",
       "lua_ls",
       "terraformls",
+      "gopls",
+      "solidity_ls_nomicfoundation"
     },
     config = {
       lua_ls = {
@@ -20,14 +21,6 @@ return {
           },
         },
       },
-      solidity = function()
-        return {
-          cmd = { 'nomicfoundation-solidity-language-server', '--stdio' },
-          filetypes = { 'solidity' },
-          single_file_support = true,
-          root_dir = require("lspconfig.util").root_pattern("hardhat.config.js", "hardhat.config.ts", "foundry.toml"),
-        }
-      end,
     },
     setup_handlers = {
       -- add custom handler
@@ -55,12 +48,6 @@ return {
         vim.keymap.set("n", "<Leader>ra", rt.hover_actions.hover_actions, { buffer = bufnr, desc = "Open Hover Actions" })
       end,
       tsserver = function(_, opts) require("typescript").setup { server = opts } end,
-      gopls = function(_, opts)
-        require('go').setup { lsp_cfg = opts }
-        local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
-
-        require('lspconfig').gopls.setup(cfg)
-      end,
     },
   },
   -- add new user interface icon
@@ -149,7 +136,7 @@ return {
     {
       "williamboman/mason-lspconfig.nvim",
       opts = {
-        ensure_installed = { "rust_analyzer", "tsserver", "gopls", "terraformls" },
+        ensure_installed = { "rust_analyzer", "tsserver", "terraformls", "gopls", "solidity_ls_nomicfoundation" },
       },
     },
     {
