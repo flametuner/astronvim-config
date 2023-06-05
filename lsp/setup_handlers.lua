@@ -13,15 +13,14 @@ return {
     }
 
     rt.setup {
-      hover_actions = {
-        auto_focues = true,
-      },
       dap = dap,
       server = opts,
+      tools = {
+        hover_actions = {
+          auto_focus = true,
+        },
+      },
     }
-    -- vim.keymap.set("n", "<Leader>rg", rt.code_action_group.code_action_group,
-    --   { buffer = bufnr, desc = "Open Action Group" })
-    -- vim.keymap.set("n", "<Leader>ra", rt.hover_actions.hover_actions, { buffer = bufnr, desc = "Open Hover Actions" })
   end,
   tsserver = function(_, opts) require("typescript").setup { server = opts } end,
 }
